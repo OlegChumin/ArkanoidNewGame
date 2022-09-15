@@ -1,7 +1,7 @@
 import javax.swing.*;
 
 /**
- Simple arcade desktop classic game Arkanoid wrote by ...
+ Simple arcade desktop classic game Arkanoid wrote by Oleg Chumin
  */
 public class Arkanoid {
     public static final int WIDTH = 410; // это константа отвечает за ширину окна
