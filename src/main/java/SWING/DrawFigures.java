@@ -10,8 +10,10 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 
 public class DrawFigures {
-    private static final int WINDOW_WIDTH = 501;
-    private static final int WINDOW_HEIGHT = 401;
+    private static final int WINDOW_WIDTH = 411;
+    private static final int WINDOW_HEIGHT = 451;
+
+    private static final int BAR_HEIGHT_LEVEL = 30;
 
 
     public static void main(String[] args) {
@@ -30,8 +32,8 @@ public class DrawFigures {
 //            g2.drawString(str, 20, 30);
 
             //рисуем линии
-            Line2D verticalLine = new Line2D.Double(WINDOW_WIDTH / 2, 0, WINDOW_WIDTH /2, WINDOW_HEIGHT);
-            Line2D horizontalLine = new Line2D.Double(0, WINDOW_HEIGHT / 2 - 20, WINDOW_WIDTH, WINDOW_HEIGHT/ 2 - 20);
+            Line2D verticalLine = new Line2D.Double(WINDOW_WIDTH / 2, 0, WINDOW_WIDTH / 2, WINDOW_HEIGHT);
+            Line2D horizontalLine = new Line2D.Double(0, WINDOW_HEIGHT / 2 - 20, WINDOW_WIDTH, WINDOW_HEIGHT / 2 - 20);
 //            Line2D newLine3 = new Line2D.Double(110, 70, 130, 90);
 //            Line2D newLine4 = new Line2D.Double(130, 90, 150, 70);
 //            Line2D newLine5 = new Line2D.Double(150, 70, 170, 90);
@@ -55,29 +57,24 @@ public class DrawFigures {
 //            restColorToOriginBlack(g2);
 //            g2.draw(rectangle2D);
 
-            RoundRectangle2D roundRectangle2D = new RoundRectangle2D.Double(WINDOW_WIDTH /2 - 30 / 2, WINDOW_HEIGHT / 2 - 10/2 - 20, 30, 10, 0, 0);
-            g2.setColor(Color.BLUE);
-            g2.draw(roundRectangle2D);
-            g2.fill(roundRectangle2D);
+            RoundRectangle2D barLeftSide = new RoundRectangle2D.Double(WINDOW_WIDTH / 2 - 30 / 2 - 20, WINDOW_HEIGHT / 2 - 10 / 2 - 20, 30, 10, 10, 10);
+            g2.setColor(Color.RED);
+            g2.draw(barLeftSide);
+            g2.fill(barLeftSide);
             restColorToOriginBlack(g2);
 
+            RoundRectangle2D barRightSide = new RoundRectangle2D.Double(WINDOW_WIDTH / 2 - 30 / 2 + 20, WINDOW_HEIGHT / 2 - 10 / 2 - 20, 30, 10, 10, 10);
+            g2.setColor(Color.RED);
+            g2.draw(barRightSide);
+            g2.fill(barRightSide);
+            restColorToOriginBlack(g2);
 
+            RoundRectangle2D barCentralPart = new RoundRectangle2D.Double(WINDOW_WIDTH / 2 - 30 / 2, WINDOW_HEIGHT / 2 - 10 / 2 - 20, 30, 10, 0, 0);
+            g2.setColor(Color.BLUE);
+            g2.draw(barCentralPart);
+            g2.fill(barCentralPart);
+            restColorToOriginBlack(g2);
 
-
-
-
-//            //Д.з.
-//            double x1, x2, y1, y2;
-//            Line2D newLine;
-//
-//
-////            for (int i = 0; i < 100; i++) {
-//////                x1 = F(i);
-//////                x2 = F(x1);
-////                y1 = F(i);
-////                y2 = F(y1);
-//                g2.draw(new Line2D.Double(x1, y1, x2, y2));
-//            }
         }
     }
 
@@ -101,7 +98,7 @@ public class DrawFigures {
         }
     }
 
-    private static void restColorToOriginBlack (Graphics2D g2) {
+    private static void restColorToOriginBlack(Graphics2D g2) {
         g2.setColor(Color.BLACK);
     }
 
