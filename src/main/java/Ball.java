@@ -39,6 +39,7 @@ public class Ball {
     }
 
     void move() {
+        // надо написать логику движения мяча
     }
 
     private boolean collisionWithBar() {

@@ -19,11 +19,9 @@ public class Bar {
 
     private Arkanoid game;
 
-//    public Bar(Arkanoid game) {
-//        this.game = game;
-//    }
-
-//    Bar bar = new Bar(new Arkanoid());
+    public Bar(Arkanoid game) {
+        this.game = game;
+    }
 
     void move(int direction) {
 
