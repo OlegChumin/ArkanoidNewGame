@@ -2,6 +2,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// класс Bricks закончен
+
 public class Bricks {
 
     public List<Brick> bricksLine = new ArrayList<>(); // создаем ряд кирпичей
