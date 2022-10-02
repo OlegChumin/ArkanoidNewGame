@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 // код завершен
 public class Levels {
@@ -11,13 +12,27 @@ public class Levels {
         this.game = game;
     }
 
-    public static void startNewLevel() {
-
+    public static void startNewLevel(Arkanoid game) {
+        Levels.current_level++;
+        Arkanoid.start_game = true;
+        //вызов rewards
+//        game.rewards
+        game.ball.xa = 0;
+        game.ball.ya = 0;
+        game.ball.x = Ball.DEFAULT_X;
+        game.ball.y = Ball.DEFAULT_Y;
+        game.levels.createLevel();
+//        game.text. расписать класс Text
+        game.speed = Arkanoid.DEFAULT_SPEED;
     }
 
 
-    void createLevel() {
-
+    void createLevel() { // метод создает уровень
+        for (int i = 0; i <= row_num ; i++) {
+            drawLevel(i);
+            game.brick.brickRows.add((ArrayList<Bricks.Brick>) game.brick.bricksLine); // проверить почему даункастит
+        }
+        // здесь создать сущность всех достижений rewards
     }
 
     void drawLevel(int i) {

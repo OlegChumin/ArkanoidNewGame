@@ -30,7 +30,7 @@ public class Ball {
     public static boolean bigBallMode = false;
     public static int bigBallModeColor = 0;
     public static boolean fireBallMode = false;
-    public static int fireBallModeColor = 5;
+    public static int fireBallModeColor = 5; //дописать в код
 
     private Arkanoid game;
 
@@ -39,20 +39,23 @@ public class Ball {
     }
 
     void move() {
-        // надо написать логику движения мяча
+        // надо дописать логику движения мяча
+        if(x + xa <= 0) {
+            xa *= -1;
+        }
     }
 
     private boolean collisionWithBar() {
         return true;
-    }
+    } // расписать реализацию метода
 
     private boolean collisionWithBricks() {
         return true;
-    }
+    } // расписать реализацию метода
 
     private boolean collisionWithBounds() {
         return true;
-    }
+    } // расписать реализацию метода
 
     public void paintBall(Graphics2D graphics) {
         graphics.setColor(Color.BLUE);
