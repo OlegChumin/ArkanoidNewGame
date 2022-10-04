@@ -18,7 +18,7 @@ public class Bricks {
     }
 
     public static class Brick {
-        private static int width = 15; // ширина блока brick
+        public static int width = 15; // ширина блока brick
         public static int height = 10; // высота блока brick
 
         int x = 15;
