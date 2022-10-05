@@ -1,10 +1,10 @@
 import java.awt.*;
 
 public class Bar {
-    public static final int WIDTH = 30;
-    public static final int HEIGHT = 10;
-    public static final int SIDE_WITH = 20;
-    private static final int BAR_HEIGHT_LEVEL = 30;
+    public static int barWidth = 30;
+    public static int varHeight = 10;
+    public static int barSideWidth = 20;
+    private static int barHeightLevel = 30;
 
     public static Color bar_main_color = Color.WHITE;
     public static Color bar_side_color = Color.GRAY;

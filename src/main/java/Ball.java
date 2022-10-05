@@ -5,7 +5,7 @@ import java.awt.*;
  */
 
 public class Ball {
-    public static final int DIAMETER = 10;
+    public static int diameter = 10;
     public static final int DEFAULT_X = 205;
     public static final int DEFAULT_Y = 350;
 
@@ -29,7 +29,13 @@ public class Ball {
 
     public static boolean bigBallMode = false;
     public static int bigBallModeColor = 0;
+
+    public static boolean ultraBallMode = false;
+
+    public static int ultraBallColor = 0;
     public static boolean fireBallMode = false;
+
+
     public static int fireBallModeColor = 5; //дописать в код
 
     private Arkanoid game;
@@ -70,9 +76,9 @@ public class Ball {
                 graphics.setColor(Color.GREEN);
                 bigBallModeColor = 0;
             }
-            graphics.fillOval(x, y, DIAMETER, DIAMETER);
+            graphics.fillOval(x, y, diameter, diameter);
         } else if(fireBallMode){}
     }
 
-    public Rectangle getBounds() {return  new Rectangle(x, y, DIAMETER, DIAMETER);}
+    public Rectangle getBounds() {return  new Rectangle(x, y, diameter, diameter);}
 }

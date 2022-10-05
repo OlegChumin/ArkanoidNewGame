@@ -26,7 +26,7 @@ public class Rewards {
     public class Reward {
         int x, y;
         int width, height;
-        String type;
+        String type; // поле отвечающее за тип приза (достижения) в игре
         boolean rewardBrickOn = false;
         boolean rewardOn = false;
     }
@@ -124,11 +124,70 @@ public class Rewards {
     }
 
     public void startReward(String type) {
-
+        Arkanoid.time_counter = 0; // а надо ли еще раз присваивать нуль?
+        for (int i = 0; i < current_rewards.size(); i++) {
+            if(current_rewards.get(i).type == "UltraBall" && type == current_rewards.get(i).type ) {
+                current_rewards.get(i).rewardBrickOn = false;
+                current_rewards.get(i).rewardOn = true;
+                Ball.ultraBallMode = true;
+                ultraBall_time = 10; // проверить число при code review
+            } else  if(current_rewards.get(i).type == "BigBall" && type == current_rewards.get(i).type ) {
+                current_rewards.remove(current_rewards.get(i));
+                if (Ball.diameter == 5) {
+                    Ball.diameter += 5;
+                } else {
+                    Ball.diameter += 10;
+                }
+            } else if(current_rewards.get(i).type == "SmallBall" && type == current_rewards.get(i).type ) {
+                current_rewards.remove(current_rewards.get(i));
+                if (Ball.diameter <= 10 && Ball.diameter > 5) {
+                    Ball.diameter -= 5;
+                } else if (Ball.diameter > 10){
+                    Ball.diameter -= 10;
+                }
+            } else if(current_rewards.get(i).type == "BigBar" && type == current_rewards.get(i).type ) {
+                current_rewards.remove(current_rewards.get(i));
+                if(Bar.barWidth == 15) {
+                    Bar.barWidth += 15;
+                    Bar.barSideWidth += 5;
+                    Bar.bar_main_color = Color.WHITE;
+                    Bar.bar_side_color = Color.GRAY;
+                } else {
+                    Bar.barWidth += 15;
+                    Bar.bar_main_color = Color.CYAN;
+                    Bar.bar_side_color = Color.BLUE;
+                }
+            } else if(current_rewards.get(i).type == "SmallBar" && type == current_rewards.get(i).type ) {
+                current_rewards.remove(current_rewards.get(i));
+                if(Bar.barWidth == 30) {
+                    Bar.barWidth -= 15;
+                    Bar.barSideWidth -= 5;
+                    Bar.bar_main_color = Color.WHITE;
+                    Bar.bar_side_color = Color.BLUE;
+                } else if(Bar.barWidth == 45) {
+                    Bar.barWidth -= 15;
+                    Bar.bar_main_color = Color.WHITE;
+                    Bar.bar_side_color = Color.GRAY;
+                }
+            } else if(current_rewards.get(i).type == "ExtraLive" && type == current_rewards.get(i).type ) {
+                current_rewards.remove(current_rewards.get(i));
+                game.bar.lives++; // добавляет 1 жизнь или + 1 bar
+            }
+        }
     }
 
-    public void stopReward() {
+    public void stopReward(String type) {
+        if(type == "UltraBall" ) {
+            for (int i = 0; i < current_rewards.size(); i++) {
+                if(type == current_rewards.get(i).type) {
+                    Ball.ultraBallMode = false;
+                    current_rewards.get(i).rewardOn = false;
+                    game.text.rewards_label.setText("");
+                    current_rewards.remove(current_rewards.get(i));
+                }  else if(type == "BigBall" || type == "SballBall") {
 
+            } else if() {} // продолжим с этого места
+        }
     }
 
     public void stopAllRewards() {
