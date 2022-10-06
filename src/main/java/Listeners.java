@@ -51,7 +51,7 @@ public class Listeners {
         @Override
         public void mouseMoved(MouseEvent e) {
             // доска - бита - платформа следует за указателем mouse
-            game.bar.x = e.getX() - (Bar.WIDTH / 2);
+            game.bar.x = e.getX() - (Bar.barWidth / 2);
         }
     }
 

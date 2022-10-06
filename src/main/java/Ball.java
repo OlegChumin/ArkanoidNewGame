@@ -1,7 +1,7 @@
 import java.awt.*;
 
 /**
- Ball responsible for all kind of balls in the game
+ * Ball responsible for all kind of balls in the game
  */
 
 public class Ball {
@@ -45,9 +45,65 @@ public class Ball {
     }
 
     void move() {
-        // надо дописать логику движения мяча
-        if(x + xa <= 0) {
+        // смена направления полета меча при столкновениях с границами игрового поля
+        if (x + xa <= 0) {
             xa *= -1;
+        } else if (x + xa >= game.getWidth() - diameter) {
+            xa = -xa;
+        } else if (y + ya <= Text.menu_bar_height) {
+            ya = 1;
+        } else if (y + ya >= game.getHeight() - diameter) {
+            if (game.bar.lives == 0) {
+                game.gameOver();
+            } else if (game.bar.lives > 0) {
+                Bar.looseLive(game);
+            }
+        } else if (collisionWithBricks()) {  //проверка столкновения с платформой Bar
+            if (ultraBallMode) {
+                game.brick.bricksLine.remove(brick);
+            } else {
+                ballTopPosition = y;
+                ballBottomPosition = y + diameter;
+                ballRightPosition = x + diameter + 14;
+                ballLeftPosition = x;
+
+                brickTopPosition = game.brick.bricksLine.get(brick).y + 1;
+                brickBottomPosition = game.brick.bricksLine.get(brick).y + Bricks.Brick.height - 1;
+                brickRightPosition = game.brick.bricksLine.get(brick).x + 14;
+                brickLeftPosition = game.brick.bricksLine.get(brick).x + Bricks.Brick.width;
+
+                // изменения направления полета меча
+
+                if ((ballBottomPosition == brickTopPosition || ballTopPosition == brickBottomPosition) &&
+                        (ballRightPosition != brickLeftPosition && ballLeftPosition != brick)) {
+                    if (ya == 1) {
+                        ya = -1;
+                    } else if (ya == -1) {
+                        ya = 1;
+                    }
+                } else {
+                    if (xa > 0) {
+                        xa *= -1;
+                    } else if (xa < 0) {
+                        xa *= -1;
+                    }
+
+                    // удаление блоков сли необходимо (после ударов)
+                    if (game.brick.bricksLine.get(brick).hits == 0) {
+                        game.brick.bricksLine.remove(brick);
+                    } else {
+                        game.brick.updateHits(brick);
+                    }
+
+                    // если все блоки были уничтожены (удалены)
+                    if (game.brick.bricksLine.size() == 0) {
+                        Levels.startNewLevel(game);
+                    }
+                }
+                // проапдейтить направление движения меча
+                x = x + xa;
+                y = y + ya;
+            }
         }
     }
 
@@ -65,20 +121,23 @@ public class Ball {
 
     public void paintBall(Graphics2D graphics) {
         graphics.setColor(Color.BLUE);
-        if(bigBallMode) {
-            if(bigBallModeColor == 0) {
+        if (bigBallMode) {
+            if (bigBallModeColor == 0) {
                 graphics.setColor(Color.RED);
                 bigBallModeColor++;
             } else if (bigBallModeColor == 1) {
                 graphics.setColor(Color.WHITE);
                 bigBallModeColor++;
-            } else if(bigBallModeColor == 2) {
+            } else if (bigBallModeColor == 2) {
                 graphics.setColor(Color.GREEN);
                 bigBallModeColor = 0;
             }
             graphics.fillOval(x, y, diameter, diameter);
-        } else if(fireBallMode){}
+        } else if (fireBallMode) {
+        }
     }
 
-    public Rectangle getBounds() {return  new Rectangle(x, y, diameter, diameter);}
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, diameter, diameter);
+    }
 }

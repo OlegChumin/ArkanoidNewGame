@@ -35,6 +35,10 @@ public class Arkanoid extends JPanel{
     Text text = new Text(this);
     Listeners listeners = new Listeners(this);
 
+    private void move() {
+        ball.move();
+    }
+
 
     public static void main(String[] args) {
         JFrame arkanoidWindow = gameWindow();
@@ -49,6 +53,18 @@ public class Arkanoid extends JPanel{
         frame.setResizable(false);
         frame.setVisible(true);
         return frame;
+    }
+
+    @Override
+    public void paint(Graphics graphics) {
+        super.paint(graphics);
+        Graphics2D g2D = (Graphics2D) graphics;
+        g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        ball.paintBall(g2D);
+        bar.paintBar(g2D);
+        brick.paint(g2D);
+        rewards.paint(g2D);
+        text.paint(g2D);
     }
 
     public void gameOver() {
