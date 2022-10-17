@@ -18,8 +18,8 @@ public class Arkanoid extends JPanel{
 
     public static long time_counter = 0;
 
-    public static int ballX = 0;
-    public static int ballY = 0;
+    public static int oldBallXa = 0; //?
+    public static int oldBallYa = 0; //?
 
     public Arkanoid() {
         setLayout(null);
@@ -33,8 +33,8 @@ public class Arkanoid extends JPanel{
     Rewards rewards = new Rewards(this);
     Levels levels = new Levels(this);
     Text text = new Text(this);
-    Listeners listeners = new Listeners(this);
 
+    Listeners listeners = new Listeners(this); //?
     private void move() {
         ball.move();
     }
@@ -68,10 +68,20 @@ public class Arkanoid extends JPanel{
     }
 
     public void gameOver() {
-
+        JOptionPane.showMessageDialog(this, "Game Over", "Game Over",
+                JOptionPane.YES_NO_OPTION);
+        System.exit(ABORT);
     }
 
     public static void startGame(Arkanoid game) {
+        if(start_game) {
+            //выбираем случайное направление меча при старте игры
+            int xDirection = (int) Math.floor(Math.random() * 2 + 1);
+            game.ball.ya = -1;
+            if(xDirection == 1) {
+                game.ball.xa = 1;
+            }
+        }
 
     }
 }

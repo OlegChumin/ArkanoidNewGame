@@ -100,7 +100,7 @@ public class Ball {
                         Levels.startNewLevel(game);
                     }
                 }
-                // проапдейтить направление движения меча
+                // изменение направление движения меча
                 x = x + xa;
                 y = y + ya;
             }
@@ -108,12 +108,63 @@ public class Ball {
     }
 
     private boolean collisionWithBar() {
-        return true;
-    } // расписать реализацию метода
+        if (game.bar.getBounds().intersects(getBounds())) {
+            return true;
+        } else if (game.bar.getBoundsLeft().intersects(getBounds())) {
+            if (xa > 0) {
+                xa *= -1;
+                if (x * xa < 0 && xa + 1 != 0) {
+                    xa++;
+                }
+                if (game.speed < 10) {
+                    game.speed += 1;
+                }
+            } else if (xa < 0) {
+                if (x * xa < 0 && xa - 1 != 0) {
+                    xa--;
+                }
+                if (game.speed > 2) {
+                    game.speed -= 1;
+                }
+            }
+            return true;
+        } else if (game.bar.getBoundsRight().intersects(getBounds())) {
+            if (xa < 0) {
+                xa *= -1;
+                if (x * xa > 0 && xa - 1 != 0) {
+                    xa--;
+                }
+                if (game.speed < 10) {
+                    game.speed += 1;
+                }
+            } else if (xa > 0) {
+                if (x * xa > 0 && xa + 1 != 0) {
+                    xa++;
+                }
+                if (game.speed > 2) {
+                    game.speed -= 1;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     private boolean collisionWithBricks() {
-        return true;
-    } // расписать реализацию метода
+        for (int i = 0; i < game.brick.bricksLine.size(); i++) {
+            if(game.brick.bricksLine.get(i).getBounds().intersects(getBounds())) {
+                brick = i;
+                // если блок имееет внутри приз (reward), то мы создаем приз (reward)
+                if(game.brick.bricksLine.get(i).hasRewards()) {
+                    game.rewards.createReward(game.brick.bricksLine.get(i).reward_type,
+                            game.brick.bricksLine.get(i).x - 3, game.brick.bricksLine.get(i).y);
+                }
+                return game.brick.bricksLine.get(i).getBounds().intersects(getBounds());
+            }
+        }
+        return false;
+    }
 
     private boolean collisionWithBounds() {
         return true;
