@@ -2,17 +2,17 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- Simple arcade desktop classic game Arkanoid wrote by Oleg Chumin
+ * Simple arcade desktop classic game Arkanoid wrote by Oleg Chumin
  */
-public class Arkanoid extends JPanel{
+public class Arkanoid extends JPanel {
     public static final int WIDTH = 410; // это константа отвечает за ширину окна
     public static final int HEIGHT = 450; // это константа отвечает за высоту окна
 
-    public static final int DEFAULT_SPEED = 6; // начальная скорость движения объектов в игре
+    public static int default_speed = 6; // начальная скорость движения объектов в игре
 
-    public int speed = DEFAULT_SPEED; // изменяема скорость игры
+    public int speed = default_speed; // изменяема скорость игры
 
-    public static boolean pause = false;
+    public static boolean paused = false;
 
     public static boolean start_game = true;
 
@@ -34,25 +34,10 @@ public class Arkanoid extends JPanel{
     Levels levels = new Levels(this);
     Text text = new Text(this);
 
-    Listeners listeners = new Listeners(this); //?
+    ListenersHandler listeners = new ListenersHandler(this); //?
+
     private void move() {
         ball.move();
-    }
-
-
-    public static void main(String[] args) {
-        JFrame arkanoidWindow = gameWindow();
-        Arkanoid game = new Arkanoid();
-
-    }
-
-    private static JFrame gameWindow() {
-        JFrame frame = new JFrame("Arkanoid game");
-        frame.setSize(WIDTH, HEIGHT);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.setVisible(true);
-        return frame;
     }
 
     @Override
@@ -74,14 +59,43 @@ public class Arkanoid extends JPanel{
     }
 
     public static void startGame(Arkanoid game) {
-        if(start_game) {
+        if (start_game) {
             //выбираем случайное направление меча при старте игры
             int xDirection = (int) Math.floor(Math.random() * 2 + 1);
             game.ball.ya = -1;
-            if(xDirection == 1) {
+            if (xDirection == 1) {
                 game.ball.xa = 1;
             }
         }
+    }
 
+
+    public static void main(String[] args) throws InterruptedException {
+        JFrame frame = new JFrame("Arkanoid game by GameDev2D");
+        Arkanoid game = new Arkanoid();
+        frame.getContentPane().add(game);
+        frame.setSize(WIDTH, HEIGHT);
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null); // разобрать этот параметр игры
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+
+        while (true) {
+            System.out.println(paused);
+            if (!paused && !start_game) {
+                game.move();
+                game.repaint();
+                time_counter++;
+                if (time_counter % 100 == 0) { //Сдвигаем все блоки вниз каждые 15 секунд
+                    if ((time_counter / 100) % 15 == 0) {
+                        for (int i = 0; i < game.brick.bricks.size(); i++) {
+                            game.brick.bricks.get(i).y += 10;
+                        }
+                    }
+                    game.rewards.paintReward();
+                }
+                Thread.sleep(game.speed);
+            }
+        }
     }
 }

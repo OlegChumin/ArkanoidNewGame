@@ -6,11 +6,11 @@ import java.awt.*;
 
 public class Ball {
     public static int diameter = 10;
-    public static final int DEFAULT_X = 205;
-    public static final int DEFAULT_Y = 350;
+    public static int default_x = 205;
+    public static int default_y = 350;
 
-    int x = DEFAULT_X;
-    int y = DEFAULT_Y;
+    int x = default_x;
+    int y = default_y;
 
     int xa = 0;
     int ya = 0;
@@ -60,17 +60,17 @@ public class Ball {
             }
         } else if (collisionWithBricks()) {  //проверка столкновения с платформой Bar
             if (ultraBallMode) {
-                game.brick.bricksLine.remove(brick);
+                game.brick.bricks.remove(brick);
             } else {
                 ballTopPosition = y;
                 ballBottomPosition = y + diameter;
                 ballRightPosition = x + diameter + 14;
                 ballLeftPosition = x;
 
-                brickTopPosition = game.brick.bricksLine.get(brick).y + 1;
-                brickBottomPosition = game.brick.bricksLine.get(brick).y + Bricks.Brick.height - 1;
-                brickRightPosition = game.brick.bricksLine.get(brick).x + 14;
-                brickLeftPosition = game.brick.bricksLine.get(brick).x + Bricks.Brick.width;
+                brickTopPosition = game.brick.bricks.get(brick).y + 1;
+                brickBottomPosition = game.brick.bricks.get(brick).y + Bricks.Brick.height - 1;
+                brickRightPosition = game.brick.bricks.get(brick).x + 14;
+                brickLeftPosition = game.brick.bricks.get(brick).x + Bricks.Brick.width;
 
                 // изменения направления полета меча
 
@@ -89,14 +89,14 @@ public class Ball {
                     }
 
                     // удаление блоков сли необходимо (после ударов)
-                    if (game.brick.bricksLine.get(brick).hits == 0) {
-                        game.brick.bricksLine.remove(brick);
+                    if (game.brick.bricks.get(brick).hits == 0) {
+                        game.brick.bricks.remove(brick);
                     } else {
                         game.brick.updateHits(brick);
                     }
 
                     // если все блоки были уничтожены (удалены)
-                    if (game.brick.bricksLine.size() == 0) {
+                    if (game.brick.bricks.size() == 0) {
                         Levels.startNewLevel(game);
                     }
                 }
@@ -107,7 +107,7 @@ public class Ball {
         }
     }
 
-    private boolean collisionWithBar() {
+    private boolean collision() {
         if (game.bar.getBounds().intersects(getBounds())) {
             return true;
         } else if (game.bar.getBoundsLeft().intersects(getBounds())) {
@@ -152,23 +152,19 @@ public class Ball {
     }
 
     private boolean collisionWithBricks() {
-        for (int i = 0; i < game.brick.bricksLine.size(); i++) {
-            if(game.brick.bricksLine.get(i).getBounds().intersects(getBounds())) {
+        for (int i = 0; i < game.brick.bricks.size(); i++) {
+            if(game.brick.bricks.get(i).getBounds().intersects(getBounds())) {
                 brick = i;
                 // если блок имееет внутри приз (reward), то мы создаем приз (reward)
-                if(game.brick.bricksLine.get(i).hasRewards()) {
-                    game.rewards.createReward(game.brick.bricksLine.get(i).reward_type,
-                            game.brick.bricksLine.get(i).x - 3, game.brick.bricksLine.get(i).y);
+                if(game.brick.bricks.get(i).hasRewards()) {
+                    game.rewards.createReward(game.brick.bricks.get(i).reward_type,
+                            game.brick.bricks.get(i).x - 3, game.brick.bricks.get(i).y);
                 }
-                return game.brick.bricksLine.get(i).getBounds().intersects(getBounds());
+                return game.brick.bricks.get(i).getBounds().intersects(getBounds());
             }
         }
         return false;
     }
-
-    private boolean collisionWithBounds() {
-        return true;
-    } // расписать реализацию метода
 
     public void paintBall(Graphics2D graphics) {
         graphics.setColor(Color.BLUE);

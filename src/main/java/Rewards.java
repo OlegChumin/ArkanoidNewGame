@@ -18,7 +18,7 @@ public class Rewards {
     int rewardExtraLiveNum = default_reward_extraLive_num; // приз дополнительная жизнь
 
     private class Random {
-        int num = (int) Math.floor(Math.random() * (game.brick.bricksLine.size() - 1) + 1);
+        int num = (int) Math.floor(Math.random() * (game.brick.bricks.size() - 1) + 1);
     }
 
     Arkanoid game;
@@ -44,48 +44,48 @@ public class Rewards {
         // позицию по rewards в каждом уровне
         while (rewardUltraBallNum > 0) {
             Random random = new Random();
-            if (game.brick.bricksLine.get(random.num).reward_type == "") {
-                game.brick.bricksLine.get(random.num).reward_type = "UltraBall";
+            if (game.brick.bricks.get(random.num).reward_type == "") {
+                game.brick.bricks.get(random.num).reward_type = "UltraBall";
                 rewardUltraBallNum--;
             }
         }
 
         while (rewardBigBallNum > 0) {
             Random random = new Random();
-            if (game.brick.bricksLine.get(random.num).reward_type == "") {
-                game.brick.bricksLine.get(random.num).reward_type = "BigBall";
+            if (game.brick.bricks.get(random.num).reward_type == "") {
+                game.brick.bricks.get(random.num).reward_type = "BigBall";
                 rewardBigBallNum--;
             }
         }
 
         while (rewardSmallBallNum > 0) {
             Random random = new Random();
-            if (game.brick.bricksLine.get(random.num).reward_type == "") {
-                game.brick.bricksLine.get(random.num).reward_type = "SmallBall";
+            if (game.brick.bricks.get(random.num).reward_type == "") {
+                game.brick.bricks.get(random.num).reward_type = "SmallBall";
                 rewardSmallBallNum--;
             }
         }
 
         while (rewardBigBarNum > 0) {
             Random random = new Random();
-            if (game.brick.bricksLine.get(random.num).reward_type == "") {
-                game.brick.bricksLine.get(random.num).reward_type = "BigBar";
+            if (game.brick.bricks.get(random.num).reward_type == "") {
+                game.brick.bricks.get(random.num).reward_type = "BigBar";
                 rewardBigBarNum--;
             }
         }
 
         while (rewardSmallBarNum > 0) {
             Random random = new Random();
-            if (game.brick.bricksLine.get(random.num).reward_type == "") {
-                game.brick.bricksLine.get(random.num).reward_type = "SmallBar";
+            if (game.brick.bricks.get(random.num).reward_type == "") {
+                game.brick.bricks.get(random.num).reward_type = "SmallBar";
                 rewardBigBallNum--;
             }
         }
 
         while (rewardExtraLiveNum > 0) {
             Random random = new Random();
-            if (game.brick.bricksLine.get(random.num).reward_type == "") {
-                game.brick.bricksLine.get(random.num).reward_type = "ExtraLive";
+            if (game.brick.bricks.get(random.num).reward_type == "") {
+                game.brick.bricks.get(random.num).reward_type = "ExtraLive";
                 rewardExtraLiveNum--;
             }
         }

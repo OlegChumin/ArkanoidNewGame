@@ -2,14 +2,14 @@ import java.awt.event.*;
 
 // класс Listener написан
 
-public class Listeners {
+public class ListenersHandler {
     private Arkanoid game;
     public static final int LEFT = 37; // надо проверить при отладке
     public static final int RIGHT = 39; // надо проверить при отладке
 
     int old_width = 0; // счетчик изменения ширины
 
-    public Listeners(Arkanoid game) {
+    public ListenersHandler(Arkanoid game) {
         this.game = game;
         KeyListener keyListener = new MyKeyListener(); // здесь создаем объект для отслеживания лево и
         // право стрелок клавиатуры

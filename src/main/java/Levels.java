@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.ArrayList;
 
 // код завершен
 public class Levels {
@@ -15,24 +14,24 @@ public class Levels {
     public static void startNewLevel(Arkanoid game) {
         Levels.current_level++;
         Arkanoid.start_game = true;
-        //вызов rewards
-//        game.rewards
+        game.rewards.stopAllRewards();
         game.ball.xa = 0;
         game.ball.ya = 0;
-        game.ball.x = Ball.DEFAULT_X;
-        game.ball.y = Ball.DEFAULT_Y;
+        game.ball.x = Ball.default_x;
+        game.ball.y = Ball.default_y;
+        game.bar.x = Bar.default_x;
         game.levels.createLevel();
-//        game.text. расписать класс Text
-        game.speed = Arkanoid.DEFAULT_SPEED;
+        game.text.start_label.setText("Level" + current_level + "Нажми для запуска");
+        game.speed = Arkanoid.default_speed;
     }
 
 
     void createLevel() { // метод создает уровень
         for (int i = 0; i <= row_num ; i++) {
             drawLevel(i);
-            game.brick.brickRows.add((ArrayList<Bricks.Brick>) game.brick.bricksLine); // проверить почему даункастит
+            game.brick.brickRows.add(game.brick.bricks);
         }
-        // здесь создать сущность всех достижений rewards
+        game.brick.brickRows.add(game.brick.bricks);
     }
 
     void drawLevel(int i) {
@@ -55,8 +54,8 @@ public class Levels {
                         break;
                 }
                 if(j % 2 != 0 && i % 2 == 0) {
-                    game.brick.bricksLine.add(brick);
-                } // продолжить с этого места
+                    game.brick.bricks.add(brick);
+                }
             }
         } else if(level == 2) { // уровень 2
             for (int j = 0; j < 17; j++) { //
@@ -83,7 +82,7 @@ public class Levels {
                         break;
                 }
                 if ((j / 1) % 2 != i % 2) { //
-                    game.brick.bricksLine.add(brick); // что делает этот код и почему добавлен на уровень 2
+                    game.brick.bricks.add(brick); // что делает этот код и почему добавлен на уровень 2
                 }
             }
         } else if(level == 3) { // уровень 3
@@ -110,7 +109,7 @@ public class Levels {
                 }
                 //добавляем еще один ряд блоков в уровень, при выполнении условия
                 if ((j) % 3 != i % 3) { // рассказать логику смещения по условию
-                    game.brick.bricksLine.add(brick);
+                    game.brick.bricks.add(brick);
                 }
             }
         } else if(level == 4) { // уровень 4
@@ -135,7 +134,7 @@ public class Levels {
                         brick.hits = 0;
                         break;
                 }
-                    game.brick.bricksLine.add(brick);
+                    game.brick.bricks.add(brick);
             }
         } else if(level == 5) { // уровень 5
             for (int j = 0; j < 10; j++) { // количество блоков на уровне
@@ -159,7 +158,7 @@ public class Levels {
                         brick.hits = 0;
                         break;
                 }
-                game.brick.bricksLine.add(brick);
+                game.brick.bricks.add(brick);
             }
         } else {
             for (int j = 0; j < 7; j++) { // количество блоков на уровне
@@ -183,7 +182,7 @@ public class Levels {
                         brick.hits = 0;
                         break;
                 }
-                game.brick.bricksLine.add(brick);
+                game.brick.bricks.add(brick);
             }
         }
     }

@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Bricks {
 
-    public List<Brick> bricksLine = new ArrayList<>(); // создаем ряд кирпичей
+    public List<Brick> bricks = new ArrayList<>(); // создаем ряд кирпичей
     // aray[i] = ....      bricksLine.get(brick)
-    public ArrayList<ArrayList<Brick>> brickRows = new ArrayList<>(); // создаем все ряды кирпичей
+    public ArrayList<List<Brick>> brickRows = new ArrayList<List<Brick>>(); // создаем все ряды кирпичей
 
 
     private Arkanoid game;
@@ -49,25 +49,25 @@ public class Bricks {
     }
 
     void updateHits(int brick) {
-        int hits = bricksLine.get(brick).hits;
+        int hits = bricks.get(brick).hits;
         switch (hits) {
             case 1:
-                bricksLine.get(brick).color = Color.GREEN;
+                bricks.get(brick).color = Color.GREEN;
                 break;
             case 2:
-                bricksLine.get(brick).color = Color.YELLOW;
+                bricks.get(brick).color = Color.YELLOW;
                 break;
             case 3:
-                bricksLine.get(brick).color = Color.LIGHT_GRAY;
+                bricks.get(brick).color = Color.LIGHT_GRAY;
                 break;
             case 4:
-                bricksLine.get(brick).color = Color.GRAY;
+                bricks.get(brick).color = Color.GRAY;
                 break;
             case 5:
-                bricksLine.get(brick).color = Color.DARK_GRAY;
+                bricks.get(brick).color = Color.DARK_GRAY;
                 break;
         }
-        bricksLine.get(brick).hits -= 1;
+        bricks.get(brick).hits -= 1;
     }
 
 
