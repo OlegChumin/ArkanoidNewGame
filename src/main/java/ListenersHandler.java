@@ -7,10 +7,9 @@ public class ListenersHandler {
     public static final int LEFT = 37; // надо проверить при отладке
     public static final int RIGHT = 39; // надо проверить при отладке
 
-    int old_width = 0; // счетчик изменения ширины
+//    int old_width = 0; // счетчик изменения ширины
 
     public ListenersHandler(Arkanoid game) {
-        this.game = game;
         KeyListener keyListener = new MyKeyListener(); // здесь создаем объект для отслеживания лево и
         // право стрелок клавиатуры
         MouseMotionListener mouseMotionListener = new MyMouseMotionListener();
@@ -18,6 +17,7 @@ public class ListenersHandler {
         game.addKeyListener(keyListener); // передаем объект в игру game
         game.addMouseMotionListener(mouseMotionListener);
         game.addMouseListener(mouseListener);
+        this.game = game;
     }
 
     public class MyKeyListener implements KeyListener {
@@ -46,6 +46,7 @@ public class ListenersHandler {
 
         @Override
         public void mouseDragged(MouseEvent e) {
+            // реализации нет
         }
 
         @Override
@@ -64,17 +65,17 @@ public class ListenersHandler {
 
         @Override
         public void mousePressed(MouseEvent e) {
-
+            // это метод не используем
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-
+            // это метод не используем
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
-
+            // это метод не используем
         }
 
         @Override

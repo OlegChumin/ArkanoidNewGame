@@ -31,10 +31,11 @@ public class Arkanoid extends JPanel {
     Bar bar = new Bar(this);
     Bricks brick = new Bricks(this);
     Rewards rewards = new Rewards(this);
-    Levels levels = new Levels(this);
-    Text text = new Text(this);
 
     ListenersHandler listeners = new ListenersHandler(this); //?
+    Text text = new Text(this);
+    Levels levels = new Levels(this);
+
 
     private void move() {
         ball.move();
@@ -47,7 +48,7 @@ public class Arkanoid extends JPanel {
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         ball.paintBall(g2D);
         bar.paintBar(g2D);
-        brick.paint(g2D);
+        brick.paintBrick(g2D);
         rewards.paint(g2D);
         text.paint(g2D);
     }
@@ -66,6 +67,17 @@ public class Arkanoid extends JPanel {
             if (xDirection == 1) {
                 game.ball.xa = 1;
             }
+            else if(xDirection == 2) {
+                game.text.start_label.setText("");
+                game.text.level_label.setText("LEVEL " + Levels.current_level);
+            } else {
+                // возобновляем игру
+                game.ball.xa = oldBallXa;
+                game.ball.ya = oldBallYa;
+                game.text.start_label.setText("");
+                game.text.start_label.setForeground(Color.GREEN);
+                paused = false;
+            }
         }
     }
 
@@ -76,7 +88,7 @@ public class Arkanoid extends JPanel {
         frame.getContentPane().add(game);
         frame.setSize(WIDTH, HEIGHT);
         frame.setVisible(true);
-        frame.setLocationRelativeTo(null); // разобрать этот параметр игры
+        frame.setLocationRelativeTo(null); // способ отцентровать окно игры или приложения
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 

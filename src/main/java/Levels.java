@@ -5,7 +5,7 @@ public class Levels {
     public static int current_level = 1;
     public int row_num = 4; // 3 или четыре ряда надо проверить
     public int level_counter = 0;
-    Arkanoid game;
+    private Arkanoid game;
 
     public Levels(Arkanoid game) {
         this.game = game;
@@ -21,7 +21,7 @@ public class Levels {
         game.ball.y = Ball.default_y;
         game.bar.x = Bar.default_x;
         game.levels.createLevel();
-        game.text.start_label.setText("Level" + current_level + "Нажми для запуска");
+        game.text.start_label.setText("Уровень " + current_level + ", Нажми для запуска");
         game.speed = Arkanoid.default_speed;
     }
 
@@ -31,7 +31,7 @@ public class Levels {
             drawLevel(i);
             game.brick.brickRows.add(game.brick.bricks);
         }
-        game.brick.brickRows.add(game.brick.bricks);
+        game.rewards.createAllRewards();
     }
 
     void drawLevel(int i) {
@@ -82,8 +82,9 @@ public class Levels {
                         break;
                 }
                 if ((j / 1) % 2 != i % 2) { //
-                    game.brick.bricks.add(brick); // что делает этот код и почему добавлен на уровень 2
+                    game.brick.bricks.add(brick); // добавляется блок, почему ....
                 }
+                level_counter = 0;
             }
         } else if(level == 3) { // уровень 3
             for (int j = 0; j < 14; j++) { // количество блоков на уровне

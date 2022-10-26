@@ -27,16 +27,12 @@ public class Ball {
     int brickLeftPosition = 0;
     int brickRightPosition = 0;
 
-    public static boolean bigBallMode = false;
-    public static int bigBallModeColor = 0;
-
     public static boolean ultraBallMode = false;
-
     public static int ultraBallColor = 0;
-    public static boolean fireBallMode = false;
-
-
-    public static int fireBallModeColor = 5; //дописать в код
+    //    public static boolean bigBallMode = false;
+    //    public static int bigBallModeColor = 0;
+//    public static boolean fireBallMode = false;
+//    public static int fireBallModeColor = 5; //дописать в код
 
     private Arkanoid game;
 
@@ -58,7 +54,10 @@ public class Ball {
             } else if (game.bar.lives > 0) {
                 Bar.looseLive(game);
             }
-        } else if (collisionWithBricks()) {  //проверка столкновения с платформой Bar
+        } else if (collision()) {//проверка столкновения с платформой Bar
+            ya = -1;
+            y = game.bar.getTopY() - diameter + 10;
+        } else if (collisionWithBricks()) {  // проверка столкновения с блоками
             if (ultraBallMode) {
                 game.brick.bricks.remove(brick);
             } else {
@@ -74,8 +73,7 @@ public class Ball {
 
                 // изменения направления полета меча
 
-                if ((ballBottomPosition == brickTopPosition || ballTopPosition == brickBottomPosition) &&
-                        (ballRightPosition != brickLeftPosition && ballLeftPosition != brick)) {
+                if ((ballBottomPosition == brickTopPosition || ballTopPosition == brickBottomPosition) && (ballRightPosition != brickLeftPosition && ballLeftPosition != brick)) {
                     if (ya == 1) {
                         ya = -1;
                     } else if (ya == -1) {
@@ -107,7 +105,7 @@ public class Ball {
         }
     }
 
-    private boolean collision() {
+    private boolean collision() { // надо проверить
         if (game.bar.getBounds().intersects(getBounds())) {
             return true;
         } else if (game.bar.getBoundsLeft().intersects(getBounds())) {
@@ -153,12 +151,11 @@ public class Ball {
 
     private boolean collisionWithBricks() {
         for (int i = 0; i < game.brick.bricks.size(); i++) {
-            if(game.brick.bricks.get(i).getBounds().intersects(getBounds())) {
+            if (game.brick.bricks.get(i).getBounds().intersects(getBounds())) {
                 brick = i;
                 // если блок имееет внутри приз (reward), то мы создаем приз (reward)
-                if(game.brick.bricks.get(i).hasRewards()) {
-                    game.rewards.createReward(game.brick.bricks.get(i).reward_type,
-                            game.brick.bricks.get(i).x - 3, game.brick.bricks.get(i).y);
+                if (game.brick.bricks.get(i).hasRewards()) {
+                    game.rewards.createReward(game.brick.bricks.get(i).reward_type, game.brick.bricks.get(i).x - 3, game.brick.bricks.get(i).y);
                 }
                 return game.brick.bricks.get(i).getBounds().intersects(getBounds());
             }
@@ -168,19 +165,18 @@ public class Ball {
 
     public void paintBall(Graphics2D graphics) {
         graphics.setColor(Color.BLUE);
-        if (bigBallMode) {
-            if (bigBallModeColor == 0) {
+        if (ultraBallMode) {
+            if (ultraBallColor == 0) {
                 graphics.setColor(Color.RED);
-                bigBallModeColor++;
-            } else if (bigBallModeColor == 1) {
+                ultraBallColor++;
+            } else if (ultraBallColor == 1) {
                 graphics.setColor(Color.WHITE);
-                bigBallModeColor++;
-            } else if (bigBallModeColor == 2) {
+                ultraBallColor++;
+            } else if (ultraBallColor == 2) {
                 graphics.setColor(Color.GREEN);
-                bigBallModeColor = 0;
+                ultraBallColor = 0;
             }
             graphics.fillOval(x, y, diameter, diameter);
-        } else if (fireBallMode) {
         }
     }
 

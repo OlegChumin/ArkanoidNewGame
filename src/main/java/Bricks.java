@@ -6,10 +6,8 @@ import java.util.List;
 
 public class Bricks {
 
-    public List<Brick> bricks = new ArrayList<>(); // создаем ряд кирпичей
-    // aray[i] = ....      bricksLine.get(brick)
-    public ArrayList<List<Brick>> brickRows = new ArrayList<List<Brick>>(); // создаем все ряды кирпичей
-
+    public ArrayList<Brick> bricks = new ArrayList<>(); // создаем ряд кирпичей
+    public ArrayList<ArrayList<Brick>> brickRows = new ArrayList<>(); // создаем все ряды кирпичей
 
     private Arkanoid game;
 
@@ -39,9 +37,9 @@ public class Bricks {
             return false;
         }
 
-        public int getTopY() {
-            return y - height;
-        }
+//        public int getTopY() {
+//            return y - height;
+//        } // не используется
 
         public Rectangle getBounds() {
             return new Rectangle(x, y, width, height);
@@ -71,7 +69,7 @@ public class Bricks {
     }
 
 
-    public void paint(Graphics2D graphics) {
+    public void paintBrick(Graphics2D graphics) {
         for (int i = 0; i < game.brick.brickRows.size(); i++) {
             for (int j = 0; j < game.brick.brickRows.get(i).size(); j++) {
                 graphics.setColor(game.brick.brickRows.get(i).get(j).color);

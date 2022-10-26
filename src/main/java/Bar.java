@@ -45,7 +45,7 @@ public class Bar {
         game.ball.y = Ball.default_y;
         game.bar.x = Bar.default_x;
         game.text.lives_label.setText("" + game.bar.lives);
-        game.text.start_label.setText("Lives" + game.bar.lives);
+        game.text.start_label.setText("Lives: " + game.bar.lives);
         game.speed = Arkanoid.default_speed;
         game.rewards.stopAllRewards();
     }
