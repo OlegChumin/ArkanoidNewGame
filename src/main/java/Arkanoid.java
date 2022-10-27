@@ -24,7 +24,8 @@ public class Arkanoid extends JPanel {
     public Arkanoid() {
         setLayout(null);
         setVisible(true);
-        setBackground(Color.BLACK);
+//        setBackground(Color.BLACK);
+        setBackground(new Color(0, 10, 59)); // цвет фона
     }
 
     Ball ball = new Ball(this);
@@ -66,10 +67,21 @@ public class Arkanoid extends JPanel {
             game.ball.ya = -1;
             if (xDirection == 1) {
                 game.ball.xa = 1;
+            } else if (xDirection == 2) {
+                game.ball.xa = -1;
             }
-            else if(xDirection == 2) {
-                game.text.start_label.setText("");
-                game.text.level_label.setText("LEVEL " + Levels.current_level);
+            start_game = false;
+            game.text.start_label.setText("");
+            game.text.level_label.setText("LEVEL " + Levels.current_level);
+        } else { // пауза в игре
+            if (!paused) {
+                oldBallXa = game.ball.xa;
+                oldBallYa = game.ball.ya;
+                game.ball.ya = 0;
+                game.ball.xa = 0;
+                game.text.start_label.setText("Game Paused by GameDev2D");
+                game.text.start_label.setForeground(Color.RED);
+                paused = true;
             } else {
                 // возобновляем игру
                 game.ball.xa = oldBallXa;

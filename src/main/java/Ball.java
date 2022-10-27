@@ -44,11 +44,11 @@ public class Ball {
         // смена направления полета меча при столкновениях с границами игрового поля
         if (x + xa <= 0) {
             xa *= -1;
-        } else if (x + xa >= game.getWidth() - diameter) {
+        } else if(x + xa >= game.getWidth() - diameter) {
             xa = -xa;
-        } else if (y + ya <= Text.menu_bar_height) {
+        } else if(y + ya <= Text.menu_bar_height) {
             ya = 1;
-        } else if (y + ya >= game.getHeight() - diameter) {
+        } else if(y + ya >= game.getHeight() - diameter) {
             if (game.bar.lives == 0) {
                 game.gameOver();
             } else if (game.bar.lives > 0) {
@@ -65,15 +65,13 @@ public class Ball {
                 ballBottomPosition = y + diameter;
                 ballRightPosition = x + diameter + 14;
                 ballLeftPosition = x;
-
                 brickTopPosition = game.brick.bricks.get(brick).y + 1;
                 brickBottomPosition = game.brick.bricks.get(brick).y + Bricks.Brick.height - 1;
                 brickRightPosition = game.brick.bricks.get(brick).x + 14;
                 brickLeftPosition = game.brick.bricks.get(brick).x + Bricks.Brick.width;
-
                 // изменения направления полета меча
-
-                if ((ballBottomPosition == brickTopPosition || ballTopPosition == brickBottomPosition) && (ballRightPosition != brickLeftPosition && ballLeftPosition != brick)) {
+                if ((ballBottomPosition == brickTopPosition || ballTopPosition == brickBottomPosition)
+                        && (ballRightPosition != brickLeftPosition && ballLeftPosition != brickRightPosition)) {
                     if (ya == 1) {
                         ya = -1;
                     } else if (ya == -1) {
@@ -85,24 +83,22 @@ public class Ball {
                     } else if (xa < 0) {
                         xa *= -1;
                     }
-
-                    // удаление блоков сли необходимо (после ударов)
+                    // удаление блоков если необходимо (после ударов)
                     if (game.brick.bricks.get(brick).hits == 0) {
                         game.brick.bricks.remove(brick);
                     } else {
                         game.brick.updateHits(brick);
                     }
-
-                    // если все блоки были уничтожены (удалены)
-                    if (game.brick.bricks.size() == 0) {
-                        Levels.startNewLevel(game);
-                    }
                 }
-                // изменение направление движения меча
-                x = x + xa;
-                y = y + ya;
+                // если все блоки были уничтожены (удалены)
+                if (game.brick.bricks.size() == 0) {
+                    Levels.startNewLevel(game);
+                }
             }
         }
+            // изменение направление движения меча
+            x = x + xa;
+            y = y + ya;
     }
 
     private boolean collision() { // надо проверить
