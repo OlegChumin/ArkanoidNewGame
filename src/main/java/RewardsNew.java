@@ -1,8 +1,9 @@
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 // предварительно код класса Rewards написан
-public class Rewards {
+
+
+public class RewardsNew {
     public static int ultraBall_time = 10;
     public int default_reward_ultraBall_num = 3;
     public int default_reward_bigBall_num = 3;
@@ -21,11 +22,12 @@ public class Rewards {
         int num = (int) Math.floor(Math.random() * (game.brick.bricks.size() - 1) + 1);
     }
 
-    Arkanoid game;
+   private Arkanoid game;
 
     public class Reward {
         int x, y;
-        int width, height;
+        int width;
+        int height;
         String type; // поле отвечающее за тип приза (достижения) в игре
         boolean rewardBrickOn = false;
         boolean rewardOn = false;
@@ -33,9 +35,9 @@ public class Rewards {
 
     Reward current_reward = new Reward();
 
-    public static List<Reward> current_rewards = new ArrayList<>();
+    public static ArrayList<Reward> current_rewards = new ArrayList<>();
 
-    public Rewards(Arkanoid game) {
+    public RewardsNew(Arkanoid game) {
         this.game = game;
     }
 
@@ -49,7 +51,6 @@ public class Rewards {
                 rewardUltraBallNum--;
             }
         }
-
         while (rewardBigBallNum > 0) {
             Random random = new Random();
             if (game.brick.bricks.get(random.num).reward_type == "") {
@@ -57,7 +58,6 @@ public class Rewards {
                 rewardBigBallNum--;
             }
         }
-
         while (rewardSmallBallNum > 0) {
             Random random = new Random();
             if (game.brick.bricks.get(random.num).reward_type == "") {
@@ -65,7 +65,6 @@ public class Rewards {
                 rewardSmallBallNum--;
             }
         }
-
         while (rewardBigBarNum > 0) {
             Random random = new Random();
             if (game.brick.bricks.get(random.num).reward_type == "") {
@@ -73,7 +72,6 @@ public class Rewards {
                 rewardBigBarNum--;
             }
         }
-
         while (rewardSmallBarNum > 0) {
             Random random = new Random();
             if (game.brick.bricks.get(random.num).reward_type == "") {
@@ -81,7 +79,6 @@ public class Rewards {
                 rewardBigBallNum--;
             }
         }
-
         while (rewardExtraLiveNum > 0) {
             Random random = new Random();
             if (game.brick.bricks.get(random.num).reward_type == "") {
@@ -109,10 +106,10 @@ public class Rewards {
             reward.height = Bricks.Brick.height;
         } else if (type == "BigBall") {
             reward.width = Bricks.Brick.width + 5;
-            reward.height = Bricks.Brick.height + 5;
+            reward.height = Bricks.Brick.width + 5;
         } else if (type == "SmallBall") {
             reward.width = Bricks.Brick.width - 8;
-            reward.height = Bricks.Brick.height - 8;
+            reward.height = Bricks.Brick.width - 8;
         } else if (type == "BigBar" || type == "SmallBar") {
             reward.width = Bricks.Brick.width + 5;
             reward.height = Bricks.Brick.height - 2;

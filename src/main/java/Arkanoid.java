@@ -22,7 +22,7 @@ public class Arkanoid extends JPanel {
     public static int oldBallYa = 0; //?
 
     public Arkanoid() {
-        setLayout(null);
+//        setLayout(null);
         setVisible(true);
 //        setBackground(Color.BLACK);
         setBackground(new Color(0, 10, 59)); // цвет фона
@@ -31,7 +31,7 @@ public class Arkanoid extends JPanel {
     Ball ball = new Ball(this);
     Bar bar = new Bar(this);
     Bricks brick = new Bricks(this);
-    Rewards rewards = new Rewards(this);
+    RewardsNew rewards = new RewardsNew(this);
 
     ListenersHandler listeners = new ListenersHandler(this); //?
     Text text = new Text(this);

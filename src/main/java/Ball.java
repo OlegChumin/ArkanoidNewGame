@@ -160,20 +160,20 @@ public class Ball {
     }
 
     public void paintBall(Graphics2D graphics) {
-        graphics.setColor(Color.BLUE);
+        graphics.setColor(Color.WHITE);
         if (ultraBallMode) {
             if (ultraBallColor == 0) {
                 graphics.setColor(Color.RED);
                 ultraBallColor++;
             } else if (ultraBallColor == 1) {
-                graphics.setColor(Color.WHITE);
+                graphics.setColor(Color.YELLOW);
                 ultraBallColor++;
             } else if (ultraBallColor == 2) {
                 graphics.setColor(Color.GREEN);
                 ultraBallColor = 0;
             }
-            graphics.fillOval(x, y, diameter, diameter);
         }
+        graphics.fillOval(x, y, diameter, diameter);
     }
 
     public Rectangle getBounds() {

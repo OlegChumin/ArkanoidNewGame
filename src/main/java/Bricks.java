@@ -2,12 +2,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-// класс Bricks закончен
+// класс Bricks закончен, проверен
 
 public class Bricks {
-
-    public ArrayList<Brick> bricks = new ArrayList<>(); // создаем ряд кирпичей
     public ArrayList<ArrayList<Brick>> brickRows = new ArrayList<>(); // создаем все ряды кирпичей
+    public ArrayList<Brick> bricks = new ArrayList<>(); // создаем ряд кирпичей
 
     private Arkanoid game;
 
@@ -27,8 +26,7 @@ public class Bricks {
 
         String reward_type = "";
 
-        int reward_num = (int) Math.floor(Math.random() * hits + 1); // переменная отвечающая за приращение
-        // результатов игры
+        int reward_num = (int) Math.floor(Math.random() * hits + 1); // случайный блок куда будет записан приз reward
 
         public boolean hasRewards() {
             if (reward_type != "" && reward_num == hits) {
@@ -37,12 +35,8 @@ public class Bricks {
             return false;
         }
 
-//        public int getTopY() {
-//            return y - height;
-//        } // не используется
-
         public Rectangle getBounds() {
-            return new Rectangle(x, y, width, height);
+            return new Rectangle(x, y, width, height); // получение границ блока
         }
     }
 
