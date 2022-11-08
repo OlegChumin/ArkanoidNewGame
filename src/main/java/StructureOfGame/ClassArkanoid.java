@@ -32,7 +32,7 @@ public class ClassArkanoid extends JPanel {
         frame.setResizable(false); // запрещаем изменять размер окна
     }
 
-    @Override // аннотация которая контролирует если мы попытаемся изменить сигнатуру методы
+    @Override // аннотация, которая контролирует если мы попытаемся изменить сигнатуру методы
     public void paint(Graphics g) { // сигнатуру переопределяемого Override метода менять нельзя
         super.paint(g); // вызов метода родительского класса JPanel библиотеки SWING
         Graphics2D graphics2D = (Graphics2D) g; // сделать Override paint метода SWING во классах игры
